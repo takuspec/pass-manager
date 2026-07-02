@@ -1,0 +1,17 @@
+{
+  "name": "URL Pass Manager",
+  "short_name": "URL Pass",
+  "description": "A local URL and password manager.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffd84d",
+  "theme_color": "#ffd84d",
+  "icons": [
+    {
+      "src": "icon-512.png?v=53",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

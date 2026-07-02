@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#ffd84d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="URL Pass">
+    <title>URL Pass Manager</title>
+    <link rel="icon" href="icon-512.png?v=53" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=53">
+    <link rel="stylesheet" href="styles.css?v=53">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <button class="nav-icon" id="backButton" type="button" aria-label="戻る" hidden>‹</button>
+        <div class="brand-block">
+          <p class="brand-name">OMOCOROPASS</p>
+          <h1 id="screenTitle" hidden>OMOCOROPASS</h1>
+        </div>
+        <div class="header-actions">
+          <button class="header-tool-button" id="editModeButton" type="button">編集</button>
+        </div>
+      </header>
+
+      <section class="screen is-active" id="folderScreen" aria-label="作品フォルダ">
+        <div class="edit-actions" id="editActions" hidden>
+          <button class="add-file-button" id="addFolderButton" type="button">フォルダを追加</button>
+        </div>
+        <div id="folderEmptyState" class="empty-state">
+          <strong>フォルダなし</strong>
+        </div>
+        <div id="folderList" class="folder-list"></div>
+      </section>
+
+      <section class="screen" id="detailScreen" aria-label="動画詳細">
+        <div id="detailContent"></div>
+      </section>
+
+      <section class="screen" id="folderFormScreen" aria-label="フォルダ登録フォーム">
+        <form id="folderForm" autocomplete="off">
+          <input type="hidden" id="editingFolderId">
+          <label>
+            <span>作品系統</span>
+            <input id="folderNameInput" name="folderName" type="text" placeholder="例: omocoro / 特典動画 / 2026年購入分" required>
+          </label>
+          <div class="form-actions form-actions-inline">
+            <button class="danger-button" id="deleteFolderButton" type="button" hidden>削除</button>
+            <button class="primary-button" id="saveFolderButton" type="submit">保存</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="screen" id="formScreen" aria-label="URLファイル登録フォーム">
+        <form id="entryForm" autocomplete="off">
+          <input type="hidden" id="editingId">
+          <label>
+            <span>タイトル</span>
+            <input id="titleInput" name="title" type="text" placeholder="2026年6月号 特典動画" required>
+          </label>
+          <label>
+            <span>URL</span>
+            <input id="urlInput" name="url" type="url" inputmode="url" placeholder="https://..." required>
+          </label>
+          <label>
+            <span>パスワード</span>
+            <input id="passwordInput" name="password" type="text" autocapitalize="off" spellcheck="false" placeholder="PDFのPW" required>
+          </label>
+          <label class="image-field">
+            <span>画像</span>
+            <input id="imageInput" name="image" type="file" accept="image/*">
+            <div class="image-preview" id="imagePreview">
+              <span>画像なし</span>
+            </div>
+          </label>
+          <div class="form-actions form-actions-inline">
+            <button class="danger-button" id="deleteEntryButton" type="button" hidden>削除</button>
+            <button class="primary-button" id="saveButton" type="submit">保存</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="screen" id="linkFormScreen" aria-label="キャプチャURL登録フォーム">
+        <form id="linkForm" autocomplete="off">
+          <input type="hidden" id="editingLinkId">
+          <input type="hidden" id="parentEntryId">
+          <label>
+            <span>タイトル</span>
+            <input id="linkTitleInput" name="linkTitle" type="text" placeholder="キャプチャ1 / 本編 / おまけ" required>
+          </label>
+          <label>
+            <span>URL</span>
+            <input id="linkUrlInput" name="linkUrl" type="url" inputmode="url" placeholder="https://..." required>
+          </label>
+          <label hidden>
+            <span>パスワード</span>
+            <input id="linkPasswordInput" name="linkPassword" type="text" autocapitalize="off" spellcheck="false" placeholder="ファイル1のPWを使用">
+          </label>
+          <div class="form-actions form-actions-inline">
+            <button class="danger-button" id="deleteLinkButton" type="button" hidden>削除</button>
+            <button class="primary-button" id="saveLinkButton" type="submit">保存</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <div class="crop-modal" id="cropModal" hidden>
+      <div class="crop-stage" id="cropStage">
+        <img id="cropImage" alt="" draggable="false">
+        <div class="crop-frame" aria-hidden="true"></div>
+      </div>
+      <div class="crop-controls">
+        <label class="zoom-control">
+          <span>拡大</span>
+          <input id="cropZoomInput" type="range" min="1" max="3" step="0.05" value="1">
+        </label>
+        <div class="crop-actions">
+          <button class="secondary-button" id="cropCancelButton" type="button">キャンセル</button>
+          <button class="primary-button" id="cropSaveButton" type="button">保存</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="app.js?v=53" defer></script>
+  </body>
+</html>
