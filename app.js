@@ -923,7 +923,7 @@ function renderDetail(entry) {
 function renderLinkDetail(entry, link) {
   const folder = findFolder(entry.folderId);
   return `
-    <div class="detail-panel">
+    <div class="detail-panel is-link-detail">
       <section class="detail-cover" data-image-id="${escapeHtml(entry.imageId || "")}">
         <span>${entry.imageId ? "" : "No Image"}</span>
       </section>
