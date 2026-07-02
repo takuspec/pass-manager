@@ -1,12 +1,12 @@
-const CACHE_NAME = "watch-pass-v53";
+const CACHE_NAME = "watch-pass-v55";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=53",
-  "./app.js?v=53",
+  "./styles.css?v=55",
+  "./app.js?v=55",
   "./manifest.webmanifest",
-  "./icon-512.png?v=53",
-  "./apple-touch-icon.png?v=53",
+  "./icon-512.png?v=55",
+  "./apple-touch-icon.png?v=55",
 ];
 
 self.addEventListener("install", (event) => {

@@ -554,6 +554,10 @@ textarea:focus {
   box-shadow: var(--shadow-sm);
 }
 
+.is-link-detail .detail-cover {
+  width: min(100%, 520px);
+}
+
 .detail-hero {
   display: grid;
   gap: 6px;
@@ -778,6 +782,10 @@ form textarea,
 
 .form-actions .primary-button {
   grid-column: 1 / -1;
+}
+
+.form-actions:has(.danger-button:not([hidden])) .primary-button {
+  grid-column: auto;
 }
 
 .toast {
