@@ -150,12 +150,14 @@ folderList.addEventListener("click", async (event) => {
       return;
     }
 
-    if (activeEntryId !== entry.id) {
+    const shouldOpenEntry = activeEntryId !== entry.id;
+    if (shouldOpenEntry) {
       activeEntryId = entry.id;
     } else {
       activeEntryId = "";
     }
     renderFolders();
+    if (shouldOpenEntry) scrollEntryToTop(entry.id);
     return;
   }
 
@@ -317,6 +319,7 @@ function showDetail(entry) {
   setScreen("detail", "詳細");
   detailContent.innerHTML = renderDetail(entry);
   hydrateImages(detailContent);
+  resetScreenScroll();
 }
 
 function showLinkDetail(entry, link) {
@@ -327,6 +330,13 @@ function showLinkDetail(entry, link) {
   setScreen("detail", "詳細");
   detailContent.innerHTML = renderLinkDetail(entry, link);
   hydrateImages(detailContent);
+  resetScreenScroll();
+}
+
+function resetScreenScroll() {
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  });
 }
 
 function showLinkForm(entry, link) {
@@ -576,6 +586,13 @@ function renderFolders() {
   folderEmptyState.hidden = data.folders.length > 0;
   folderList.innerHTML = data.folders.map(renderFolder).join("");
   hydrateImages(folderList);
+}
+
+function scrollEntryToTop(entryId) {
+  requestAnimationFrame(() => {
+    const entryElement = [...folderList.querySelectorAll("[data-id]")].find((item) => item.dataset.id === entryId);
+    entryElement?.scrollIntoView({ block: "start", behavior: "smooth" });
+  });
 }
 
 function toggleEditMode() {

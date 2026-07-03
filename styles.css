@@ -372,6 +372,7 @@ textarea:focus {
 .entry-group {
   display: grid;
   gap: 8px;
+  scroll-margin-top: calc(86px + env(safe-area-inset-top));
 }
 
 .entry-group.is-open .video-card {
